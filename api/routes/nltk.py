@@ -23,7 +23,7 @@ def tokenize() -> Response:
         text = data.get("text")
         tokens = nltk.word_tokenize(text)
         log(log.INFO, "Successful tokenize")
-        return jsonify(ResponseSchema(status="success", message="Text tokenized", response=tokens).model_dump()), 200
+        return jsonify(ResponseSchema(status="success", message="Text tokenized", data=tokens).model_dump()), 200
 
 
 @nltk_blueprint.route("/post_tag", methods=["POST"])
@@ -42,7 +42,7 @@ def post_tag() -> Response:
         tokens = nltk.word_tokenize(text)
         tags = nltk.pos_tag(tokens)
         log(log.INFO, "Successful post_tag")
-        return jsonify(ResponseSchema(status="success", message="Partial language markup got", response=tags).model_dump()), 200
+        return jsonify(ResponseSchema(status="success", message="Partial language markup got", data=tags).model_dump()), 200
 
 
 @nltk_blueprint.route("/ner", methods=["POST"])
@@ -68,4 +68,4 @@ def ner() -> Response:
                 entities.append((' '.join([word for word, tag in entity]), entity.label()))
 
         log(log.INFO, "Successful ner")
-        return jsonify(ResponseSchema(status="success", message="Recognition of named entities done", response=entities).model_dump()), 200
+        return jsonify(ResponseSchema(status="success", message="Recognition of named entities done", data=entities).model_dump()), 200

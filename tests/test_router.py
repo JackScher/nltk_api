@@ -15,7 +15,7 @@ def test_tokenize(client: FlaskClient) -> None:
     expected_list = ["At", "eight", "o'clock", "on", "Thursday", "morning", ".", "Arthur", "did", "n't", "feel", "very", "good", "."]
     r_data = response.json
     assert response.status_code == 200
-    assert expected_list == r_data["response"]
+    assert expected_list == r_data["data"]
 
 
 def test_post_tag(client: FlaskClient) -> None:
@@ -33,7 +33,7 @@ def test_post_tag(client: FlaskClient) -> None:
     ]
     r_data = response.json
     assert response.status_code == 200
-    assert expected_list == r_data["response"]
+    assert expected_list == r_data["data"]
 
 
 def test_ner(client: FlaskClient) -> None:
@@ -51,4 +51,4 @@ def test_ner(client: FlaskClient) -> None:
     ]
     r_data = response.json
     assert response.status_code == 200
-    assert expected_list == r_data["response"]
+    assert expected_list == r_data["data"]

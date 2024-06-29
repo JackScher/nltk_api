@@ -6,4 +6,4 @@ class BaseSchema(BaseModel):
 
 
 class ResponseSchema(BaseSchema):
-    response: list
+    data: list
