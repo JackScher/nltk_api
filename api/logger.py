@@ -1,11 +1,11 @@
 import sys
 import logging
+from typing import Any, Dict
 
 LOGGER_NAME = "NLTKLogger"
 
 
 class Logger(object):
-    # __created_std_out = False
     log_file = bytes
     EXCEPTION = 100
     CRITICAL = 50
@@ -15,7 +15,7 @@ class Logger(object):
     DEBUG = 10
     NOTSET = 0
 
-    def __init__(self):
+    def __init__(self: object) -> None:
         self.__log = logging.getLogger(LOGGER_NAME)
         # create formatter
         formatter = logging.Formatter("%(asctime)-15s [%(levelname)-8s] %(message)s")
@@ -34,16 +34,11 @@ class Logger(object):
             self.EXCEPTION: self.__log.exception,
         }
 
-    def __call__(self, lvl, msg, *args, **kwargs):
+    def __call__(self: object, lvl: str, msg: str, *args: Any, **kwargs: Dict[str, Any]) -> None:
         if lvl in self.__methods_map:
             self.__methods_map[lvl](msg, *args, **kwargs)
         else:
             self.__log.log(lvl, msg, *args, **kwargs)
-
-    def set_level(self, level=None):
-        if level is None:
-            level = self.INFO
-        self.__log.setLevel(level)
 
 
 log = Logger()
